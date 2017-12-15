@@ -42,22 +42,21 @@ function ballReset() {
 function moveEverything() {
   ballX = ballX + ballSpeedX;
   ballY = ballY + ballSpeedY;
-  paddle2Y = ballY - PADDLE_HEIGHT/2;
-
+  paddle2Y = ballY - PADDLE_HEIGHT / 2;
 
   if (ballX - 20 < 0) {
-    if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT  ){
-        ballSpeedX = -ballSpeedX;
-    }else {
+    if (ballY > paddle1Y && ballY < paddle1Y + PADDLE_HEIGHT) {
+      ballSpeedX = -ballSpeedX;
+    } else {
       ballReset();
     }
 
   }
 
   if (ballX + 20 > canvas.width) {
-    if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT  ){
-        ballSpeedX = -ballSpeedX;
-    }else {
+    if (ballY > paddle2Y && ballY < paddle2Y + PADDLE_HEIGHT) {
+      ballSpeedX = -ballSpeedX;
+    } else {
       ballReset();
     }
   }
@@ -78,7 +77,7 @@ function drawEverything() {
   // Paddle
   colorRect(10, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'wheat');
   // Paddle2
-  colorRect(canvas.width - 20 , paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
+  colorRect(canvas.width - 20, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 
   // Ball
   colorCircle(ballX, ballY, 10, 'cyan');
