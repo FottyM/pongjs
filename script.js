@@ -5,7 +5,9 @@ let ballY = 50;
 let ballSpeedX = 10;
 let ballSpeedY = 4
 let paddle1Y = 250;
+let paddle2Y = 250;
 const PADDLE_HEIGHT = 100;
+const PADDLE_THICKNESS = 10;
 
 function calculateMousePosition(e) {
   let rect = canvas.getBoundingClientRect();
@@ -40,14 +42,24 @@ function ballReset() {
 function moveEverything() {
   ballX = ballX + ballSpeedX;
   ballY = ballY + ballSpeedY;
+  paddle2Y = ballY - PADDLE_HEIGHT/2;
+
 
   if (ballX - 20 < 0) {
-    // ballSpeedX = -ballSpeedX;
-    ballReset();
+    if(ballY > paddle1Y && ballY < paddle1Y+PADDLE_HEIGHT  ){
+        ballSpeedX = -ballSpeedX;
+    }else {
+      ballReset();
+    }
+
   }
 
   if (ballX + 20 > canvas.width) {
-    ballSpeedX = -ballSpeedX;
+    if(ballY > paddle2Y && ballY < paddle2Y+PADDLE_HEIGHT  ){
+        ballSpeedX = -ballSpeedX;
+    }else {
+      ballReset();
+    }
   }
 
   if (ballY - 20 < 0) {
@@ -64,7 +76,9 @@ function drawEverything() {
   colorRect(0, 0, canvas.width, canvas.height, 'black');
 
   // Paddle
-  colorRect(10, paddle1Y, 10, PADDLE_HEIGHT, 'wheat');
+  colorRect(10, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'wheat');
+  // Paddle2
+  colorRect(canvas.width - 20 , paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, 'white');
 
   // Ball
   colorCircle(ballX, ballY, 10, 'cyan');
